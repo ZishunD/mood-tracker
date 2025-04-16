@@ -2,7 +2,6 @@ package database
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -14,9 +13,8 @@ var DB *gorm.DB
 
 func ConnectDB() {
 	// 载入 .env 文件
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if os.Getenv("GO_ENV") != "production" {
+		_ = godotenv.Load()
 	}
 
 	// 从环境变量读取
