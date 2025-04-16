@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/ZishunD/moodgo/database"
 	"github.com/ZishunD/moodgo/models"
 	"github.com/ZishunD/moodgo/routes"
@@ -19,5 +21,10 @@ func main() {
 	// 注册路由
 	routes.SetupRoutes(app)
 
-	app.Listen(":3000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	app.Listen("0.0.0.0:" + port)
 }
